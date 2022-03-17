@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+        {% include "includes/header.html.twig" %}
+    <div class="body">
+        <style>
+            .body{
+                border-left: 20px;
+            }
+        </style>
+        {# On va chercher les informations de l'utilisateurs avec la variable définie dans le ProfileController #}
+        Username : {{ user.username }}<br>
+        Pastèques on your account : {{ user.money }}
+        <br><br><br>
+
+        {# On récupère l'inventaire en utilisant la variable owns dans le ProfileController  #}
+        Inventory :
+        <br><br>
+        {% for own in owns %}
+            <div>
+                Item name : {{ own.item.name }}<br>
+                Item brand : {{ own.item.brand }}<br>
+                Item category : {{ own.item.category }}<br>
+                count : {{ own.count }}
+            </div><br><br>
+        {% endfor %}
+    </div>
+{% endblock %}

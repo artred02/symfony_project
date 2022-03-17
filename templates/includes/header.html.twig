@@ -1,0 +1,76 @@
+{% block header %}
+
+{# Cette page est en fait la navbar présente sur toutes les pages avec des bouttons qui redirigent
+    vers les pages dont on a besoin (désolé pour le style j ai du mal avec boostrap) #}
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Main</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            {# Si l'utilisateur n'est pas connecté : #}
+            {% if app.user is null %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('app_register') }}">Register</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                    </li>
+                </ul>
+
+             {# Si il est connecté alors on affiche un button pour les items et le profil #}
+            {% else %}
+                {% if app.user %}
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('items') }}">Shop</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('profile') }}">Profile</a>
+                        </li>
+                    </ul>
+                {% endif %}
+
+                {# Si c'est un admin, on lui affiche les fonction d'admin #}
+                {% if "ROLE_ADMIN" in app.user.roles %}
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('admin') }}">Administration</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('item_form') }}">Add Item</a>
+                        </li>
+                    </ul>
+                {% endif %}
+
+                {# Admin ou non, ce bouton permet de logout #}
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+{% endblock %}
+
+{%  block stylesheets %}
+
+{# un peu de style ne fait pas de mal #}
+<style>
+    body{
+        background: #fff16e;
+    }
+    .body{
+        margin: 20px;
+    }
+    .right{
+        float: right;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MainPage{% endblock %}
+
+{% block body %}
+
+    {% include "includes/header.html.twig" %}
+
+    {# Le but est d'afficher les items dans le shop se trouvant dans le /items #}
+
+    <div class="body">
+        <br><br>
+        {% for item in items %}
+            Name : {{ item.name }} <br>
+            Category : {{ item.category }}<br>
+            Brand : {{ item.brand }}<br>
+            Price : {{ item.price }}
+            {% if user.money >= item.price %}
+                <a href="{{ path('buy_item', {itemId: item.id}) }}"><i class="material-icons red-text">buy now!</i></a>
+            {% else %}
+                You don't have any money
+            {% endif %}
+            <br><br>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

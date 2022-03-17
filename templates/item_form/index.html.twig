@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ItemForm{% endblock %}
+
+{% block body %}
+    {% include "includes/header.html.twig" %}
+    <br><br>
+    <h1>add item</h1>
+
+    {# On fait le formulaire qu on a déclaré dans le controlleur #}
+
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.brand) }}
+    {{ form_row(form.price) }}
+
+    <button type="submit" class="btn">Add</button>
+    {{ form_end(form) }}
+
+
+{% endblock %}

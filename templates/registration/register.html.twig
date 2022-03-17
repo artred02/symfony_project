@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% include "includes/header.html.twig" %}
+
+    {# Encore désolé pour le style, cette fois on fait un formulaire d'inscription un peu différemment de celui des items
+     puisque j'ai utilisé des form_widget #}
+
+    <div class="container center">
+        <div class="center">
+            <div><br></div>
+            <div class="oui"><br><h1>Inscription</h1><br></div>
+            <div><br></div>
+            {{ form_start(registrationForm) }}
+            <div class="input-field col s12 m6 l6 offset-m3 offset-l3">
+                {{ form_widget(registrationForm.username, {'attr': {'placeholder': 'Nom d\'utilisateur'}}) }}
+                <span class="error">{{ form_errors(registrationForm.username) }}</span>
+            </div>
+            <br>
+            <div class="input-field col s12 m6 l6 offset-m3 offset-l3">
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
+                <span class="error">{{ form_errors(registrationForm.plainPassword) }}</span>
+            </div>
+            <br>
+            <div class="input-field col s12 m6 l6 offset-m3 offset-l3">
+                {{ form_row(registrationForm.agreeTerms) }}
+            </div>
+            <br>
+            <div class="input-field col s12">
+                <input type="submit" name="" class="btn btn-primary" value="M'inscrire">
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+
+    <style>
+        .center{
+            display: grid;
+            justify-content: center;
+        }
+        .oui{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+
+
+{% endblock %}
